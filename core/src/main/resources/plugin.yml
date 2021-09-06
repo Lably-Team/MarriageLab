@@ -1,0 +1,3 @@
+name: MarriageLab
+version: ${pom.version}
+main: org.lablyteam.marriagelab.MarriageLab

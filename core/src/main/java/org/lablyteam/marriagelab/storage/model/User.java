@@ -39,7 +39,7 @@ public class User implements ConfigurationSerializable {
         this(
                 UUID.fromString(serial.get("uuid").toString()),
                 Gender.valueOf(serial.get("gender").toString()),
-                serial.get("partner").toString()
+                serial.get("partner").toString() != null ? serial.get("partner").toString() : null
         );
     }
 
@@ -69,10 +69,7 @@ public class User implements ConfigurationSerializable {
         Map<String, Object> serial = new HashMap<>();
         serial.put("uuid", uuid.toString());
         serial.put("gender", gender.name().toUpperCase());
-
-        if(partner != null) {
-            serial.put("partner", partner);
-        }
+        serial.put("partner", partner);
 
         return serial;
     }

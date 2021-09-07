@@ -5,6 +5,7 @@ import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.lablyteam.marriagelab.gender.Gender;
 import org.lablyteam.marriagelab.storage.StorageMethod;
 import org.lablyteam.marriagelab.storage.database.Database;
 import org.lablyteam.marriagelab.storage.database.mongo.MongoDatabase;
@@ -13,6 +14,8 @@ import org.lablyteam.marriagelab.storage.manager.mongo.MongoDataManager;
 import org.lablyteam.marriagelab.storage.manager.yaml.YamlDataManager;
 import org.lablyteam.marriagelab.storage.model.User;
 import org.lablyteam.marriagelab.utils.Configuration;
+
+import java.util.UUID;
 
 public class MarriageLab extends JavaPlugin {
 
@@ -28,6 +31,8 @@ public class MarriageLab extends JavaPlugin {
         setupStorage();
 
         getLogger().info("MarriageLab version " + getDescription().getVersion() + " has been enabled!");
+
+        testStorage();
     }
 
     @Override
@@ -75,5 +80,10 @@ public class MarriageLab extends JavaPlugin {
                 break;
             }
         }
+    }
+
+    private void testStorage() {
+        User user = new User(UUID.randomUUID(), Gender.FEMALE, "nuko");
+        dataManager.save(user.getUUID(), user);
     }
 }

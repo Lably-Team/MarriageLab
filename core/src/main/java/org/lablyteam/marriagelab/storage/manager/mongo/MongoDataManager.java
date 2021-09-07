@@ -27,6 +27,7 @@ public class MongoDataManager<T> implements DataManager<T> {
         return find(uuid) != null;
     }
 
+    // TODO: add an interface since we don't need the UUID on the mongo data manager
     @Override
     public void save(UUID uuid, T object) {
         datastore.save(object);

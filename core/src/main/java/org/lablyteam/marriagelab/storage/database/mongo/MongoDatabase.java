@@ -12,21 +12,8 @@ public class MongoDatabase extends Database {
         connect();
     }
 
-    public MongoDatabase(String uri) {
-        super(uri);
-        connect();
-    }
-
     @Override
     public void connect() {
-        if (uri != null && !uri.trim().isEmpty()) {
-            client = new MongoClient(new MongoClientURI(uri));
-            return;
-        }
-
-        ServerAddress address = new ServerAddress(hostname, port);
-        MongoClientOptions clientOptions = MongoClientOptions.builder().build();
-
         if (password != null && !password.trim().isEmpty()) {
             MongoCredential credential = MongoCredential.createCredential(
                     username,
@@ -35,12 +22,15 @@ public class MongoDatabase extends Database {
             );
 
             this.client = new MongoClient(
-                    address,
+                    new ServerAddress(hostname, port),
                     credential,
-                    clientOptions
+                    MongoClientOptions.builder().build()
             );
         } else {
-            this.client = new MongoClient(address, clientOptions);
+            this.client = new MongoClient(
+                    new ServerAddress(hostname, port),
+                    MongoClientOptions.builder().build()
+            );
         }
     }
 

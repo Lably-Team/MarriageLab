@@ -6,6 +6,8 @@ import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.lablyteam.marriagelab.loader.Loader;
+import org.lablyteam.marriagelab.loader.main.MainLoader;
 import org.lablyteam.marriagelab.storage.StorageMethod;
 import org.lablyteam.marriagelab.storage.database.Database;
 import org.lablyteam.marriagelab.storage.database.mongo.MongoDatabase;
@@ -18,7 +20,7 @@ import org.lablyteam.marriagelab.utils.Configuration;
 public class MarriageLab extends JavaPlugin {
 
     @Getter
-    private Configuration config;
+    private Configuration config, language;
     @Getter
     private DataManager<User> dataManager;
 
@@ -26,6 +28,7 @@ public class MarriageLab extends JavaPlugin {
     public void onEnable() {
         setupConfiguration();
         setupStorage();
+        load();
 
         getLogger().info("MarriageLab version " + getDescription().getVersion() + " has been enabled!");
     }
@@ -36,8 +39,14 @@ public class MarriageLab extends JavaPlugin {
         getLogger().info("(see you next time...)");
     }
 
+    private void load() {
+        Loader loader = new MainLoader(this);
+        loader.load();
+    }
+
     private void setupConfiguration() {
         this.config = new Configuration(this, "config");
+        this.language = new Configuration(this, "language");
     }
 
     private void setupStorage() {

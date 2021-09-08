@@ -4,6 +4,7 @@ public abstract class Database {
 
     protected String hostname, username, password, database;
     protected int port;
+    protected boolean ssl;
 
     public Database(String hostname, int port, String username, String password, String database) {
         this.hostname = hostname;

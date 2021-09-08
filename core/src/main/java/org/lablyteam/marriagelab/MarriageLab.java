@@ -1,5 +1,6 @@
 package org.lablyteam.marriagelab;
 
+import com.mongodb.client.MongoClient;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
@@ -16,7 +17,6 @@ import org.lablyteam.marriagelab.utils.Configuration;
 
 public class MarriageLab extends JavaPlugin {
 
-    private Database database;
     @Getter
     private Configuration config;
     @Getter
@@ -46,15 +46,19 @@ public class MarriageLab extends JavaPlugin {
             case MONGODB: {
                 getLogger().info("Using MongoDB as the storage method.");
 
-                this.database = new MongoDatabase(
+                MongoDatabase database = new MongoDatabase(
                         config.getString("config.storage.mongodb.hostname"),
                         config.getInt("config.storage.mongodb.port"),
                         config.getString("config.storage.mongodb.username"),
                         config.getString("config.storage.mongodb.password"),
-                        config.getString("config.storage.mongodb.database")
+                        config.getString("config.storage.mongodb.database"),
+                        config.getBoolean("config.storage.mongodb.ssl")
                 );
 
-                Datastore datastore = Morphia.createDatastore(config.getString("config.storage.mongodb.database"));
+                Datastore datastore = Morphia.createDatastore(
+                        database.getClient(),
+                        config.getString("config.storage.mongodb.database")
+                );
 
                 datastore.getMapper().setOptions(
                         MapperOptions.builder().classLoader(
@@ -68,7 +72,7 @@ public class MarriageLab extends JavaPlugin {
                 return;
             }
             case YAML: {
-                getLogger().info("Using YAML as the storage method.");
+                getLogger().warning("Using YAML as the storage method. This is not recommended as it contains a lot of bugs.");
                 this.dataManager = new YamlDataManager<>(User.class, new Configuration(this, "data"));
                 return;
             }

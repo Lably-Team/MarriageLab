@@ -1,10 +1,10 @@
 package org.lablyteam.marriagelab.storage.model;
 
+import com.mongodb.lang.Nullable;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
-import org.jetbrains.annotations.Nullable;
 import org.lablyteam.marriagelab.gender.Gender;
 
 import java.util.HashMap;
@@ -17,7 +17,14 @@ public class User implements ConfigurationSerializable {
     @Id
     private final UUID uuid;
     private Gender gender;
+    @Nullable
     private String partner;
+
+    public User() {
+        this.uuid = UUID.randomUUID();
+        this.gender = Gender.UNSPECIFIED;
+        this.partner = null;
+    }
 
     public User(UUID uuid) {
         this.uuid = uuid;
@@ -51,7 +58,6 @@ public class User implements ConfigurationSerializable {
         return gender;
     }
 
-    @Nullable
     public String getPartner() {
         return partner;
     }

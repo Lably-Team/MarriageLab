@@ -1,13 +1,19 @@
 package org.lablyteam.marriagelab.storage.database.mongo;
 
-import com.mongodb.*;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import org.lablyteam.marriagelab.storage.database.Database;
+
+import java.util.Arrays;
 
 public class MongoDatabase extends Database {
 
     private MongoClient client;
 
-    public MongoDatabase(String hostname, int port, String username, String password, String database) {
+    public MongoDatabase(String hostname, int port, String username, String password, String database, boolean ssl) {
         super(hostname, port, username, password, database);
         connect();
     }
@@ -21,16 +27,22 @@ public class MongoDatabase extends Database {
                     password.toCharArray()
             );
 
-            this.client = new MongoClient(
-                    new ServerAddress(hostname, port),
-                    credential,
-                    MongoClientOptions.builder().build()
-            );
+            MongoClientSettings settings = MongoClientSettings.builder()
+                    .credential(credential)
+                    .applyToSslSettings(builder -> builder.enabled(ssl))
+                    .applyToClusterSettings(builder ->
+                            builder.hosts(Arrays.asList(new ServerAddress(hostname, port))))
+                    .build();
+
+            this.client = MongoClients.create(settings);
         } else {
-            this.client = new MongoClient(
-                    new ServerAddress(hostname, port),
-                    MongoClientOptions.builder().build()
-            );
+            MongoClientSettings settings = MongoClientSettings.builder()
+                    .applyToSslSettings(builder -> builder.enabled(ssl))
+                    .applyToClusterSettings(builder ->
+                            builder.hosts(Arrays.asList(new ServerAddress(hostname, port))))
+                    .build();
+
+            this.client = MongoClients.create(settings);
         }
     }
 

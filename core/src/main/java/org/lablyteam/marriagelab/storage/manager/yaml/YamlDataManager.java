@@ -1,9 +1,7 @@
 package org.lablyteam.marriagelab.storage.manager.yaml;
 
-import lombok.RequiredArgsConstructor;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.lablyteam.marriagelab.storage.manager.DataManager;
-import org.lablyteam.marriagelab.storage.model.User;
 import org.lablyteam.marriagelab.utils.Configuration;
 
 import java.util.UUID;

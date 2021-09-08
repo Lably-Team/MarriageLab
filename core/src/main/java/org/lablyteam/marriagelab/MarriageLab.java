@@ -1,15 +1,12 @@
 package org.lablyteam.marriagelab;
 
-import com.mongodb.client.MongoClient;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
-import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.loader.main.MainLoader;
 import org.lablyteam.marriagelab.storage.StorageMethod;
-import org.lablyteam.marriagelab.storage.database.Database;
 import org.lablyteam.marriagelab.storage.database.mongo.MongoDatabase;
 import org.lablyteam.marriagelab.storage.manager.DataManager;
 import org.lablyteam.marriagelab.storage.manager.mongo.MongoDataManager;
@@ -19,9 +16,7 @@ import org.lablyteam.marriagelab.utils.Configuration;
 
 public class MarriageLab extends JavaPlugin {
 
-    @Getter
     private Configuration config, language;
-    @Getter
     private DataManager<User> dataManager;
 
     @Override
@@ -86,5 +81,17 @@ public class MarriageLab extends JavaPlugin {
                 return;
             }
         }
+    }
+
+    public Configuration getConfig() {
+        return this.config;
+    }
+
+    public Configuration getLanguage() {
+        return this.language;
+    }
+
+    public DataManager<User> getDataManager() {
+        return this.dataManager;
     }
 }

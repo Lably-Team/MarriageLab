@@ -1,6 +1,5 @@
 package org.lablyteam.marriagelab.commands.usage;
 
-import lombok.RequiredArgsConstructor;
 import me.fixeddev.commandflow.CommandContext;
 import me.fixeddev.commandflow.usage.UsageBuilder;
 import net.kyori.text.Component;
@@ -10,10 +9,13 @@ import org.lablyteam.marriagelab.MarriageLab;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 public class CommandUsageBuilder implements UsageBuilder {
 
     private final MarriageLab plugin;
+
+    public CommandUsageBuilder(MarriageLab plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public Component getUsage(CommandContext commandContext) {

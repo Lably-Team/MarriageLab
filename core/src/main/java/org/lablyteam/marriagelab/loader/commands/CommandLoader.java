@@ -1,6 +1,5 @@
 package org.lablyteam.marriagelab.loader.commands;
 
-import lombok.RequiredArgsConstructor;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
@@ -16,12 +15,15 @@ import org.lablyteam.marriagelab.loader.Loader;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 public class CommandLoader implements Loader {
 
     private final MarriageLab plugin;
     private AnnotatedCommandTreeBuilder builder;
     private CommandManager commandManager;
+
+    public CommandLoader(MarriageLab plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public void load() {

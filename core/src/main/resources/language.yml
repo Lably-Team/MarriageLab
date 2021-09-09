@@ -1,5 +1,5 @@
 language:
-  plugin_reloaded: "&b&lMARRIAGELAB &8» &rPlugin configuration files reloaded."
+  plugin_reloaded: "&b&lMARRIAGELAB &8» &rPlugin configuration files reloaded. Changing the storage method requires a restart."
   marry:
     married_broadcast: "&d&lMARRY &8\xbb &a%player1% &rand &a%player2% &rare now married! Congratulations!"
     main_subcommand: |-

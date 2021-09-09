@@ -2,8 +2,8 @@ package org.lablyteam.marriagelab.commands.usage;
 
 public enum CommandUsage {
 
-    MARRY("/marry <player>"),
-    PARTNERSHIP("/partnership <option> [<player>]");
+    REQUEST("/marry request <player>"),
+    GENDER("/marry gender <gender>");
 
     private final String usage;
 

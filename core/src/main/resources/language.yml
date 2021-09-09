@@ -1,2 +1,22 @@
 language:
-  usage: "&4&lERROR &8\xbb &rCorrect usage: &a%usage%"
+  marry:
+    main_subcommand: |-
+      &d&lMARRY &8» &rHere's a list of available subcommands:
+      &d&lMARRY &8» &a/marry help: &rshows this list
+      &d&lMARRY &8» &a/marry gender <gender>: &rupdates your gender
+      &d&lMARRY &8» &a/marry request <player>: &rsends a marry request
+      &d&lMARRY &8» &a/marry <accept/deny> <player>: &raccepts/denies a marry request
+      &d&lMARRY &8» &a/marry <block/unblock> <player>: &rblocks/unblocks a player from sending requests
+    block:
+      already_blocked: "&d&lMARRY &8\xbb &a%player% &ris already blocked."
+      player_blocked: "&d&lMARRY &8\xbb &rYou have added &a%player% &rto your list of blocked players."
+    unblock:
+      not_blocked: "&d&lMARRY &8\xbb &a%player% &ris not currently in your list of blocked players."
+      unblocked: "&d&lMARRY &8\xbb &rYou have removed &a%player% &rfrom your list of blocked players."
+    gender:
+      usage: "&b&lGENDER &8\xbb &rCorrect usage: &a/marry gender <male/female/other/none>"
+      usage_other_disabled: "&b&lGENDER &8\xbb &rCorrect usage: &a/marry gender <male/female/none>"
+      updated_male: "&b&lGENDER &8\xbb &rYour gender has been set to &amale&r."
+      updated_female: "&b&lGENDER &8\xbb &rYour gender has been set to &afemale&r."
+      updated_unspecified: "&b&lGENDER &8\xbb &rYour gender has been set to &aunspecified&r."
+      updated_other: "&b&lGENDER &8\xbb &rYour gender has been set to &aother&r."

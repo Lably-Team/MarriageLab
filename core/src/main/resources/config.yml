@@ -1,4 +1,6 @@
 config:
+  gender:
+    enable_other: true
   storage:
     method: YAML
     mongodb:

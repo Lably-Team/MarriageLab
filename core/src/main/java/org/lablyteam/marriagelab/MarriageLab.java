@@ -64,6 +64,7 @@ public class MarriageLab extends JavaPlugin {
                         config.getString("config.storage.mongodb.database")
                 );
 
+                // TODO: change this since it's marked for removal
                 datastore.getMapper().setOptions(
                         MapperOptions.builder().classLoader(
                                 MarriageLab.class.getClassLoader()

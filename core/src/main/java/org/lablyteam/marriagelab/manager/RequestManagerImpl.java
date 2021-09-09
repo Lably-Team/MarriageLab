@@ -99,6 +99,8 @@ public class RequestManagerImpl implements RequestManager {
 
         plugin.getDataManager().save(from, requesterUser);
         plugin.getDataManager().save(to, requesterUser);
+
+        broadcast(requester, receiver);
     }
 
     @Override
@@ -128,5 +130,20 @@ public class RequestManagerImpl implements RequestManager {
                             .replace("%player%", requester.getName())
             );
         }
+    }
+
+    private void broadcast(OfflinePlayer requester, OfflinePlayer receiver) {
+        Bukkit.getOnlinePlayers().forEach((Player player) -> {
+            UUID uuid = player.getUniqueId();
+
+            if(uuid.equals(requester.getUniqueId()) || uuid.equals(receiver.getUniqueId())) {
+                return;
+            }
+
+            player.sendMessage(plugin.getLanguage().getString("language.marry.married_broadcast")
+                    .replace("%player1%", requester.getName())
+                    .replace("%player2%", receiver.getName())
+            );
+        });
     }
 }

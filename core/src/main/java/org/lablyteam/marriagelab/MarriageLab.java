@@ -95,7 +95,6 @@ public class MarriageLab extends JavaPlugin {
             case YAML: {
                 getLogger().info("Using YAML as the storage method.");
                 this.dataManager = new YamlDataManager<>(User.class, new Configuration(this, "data"));
-                return;
             }
         }
     }

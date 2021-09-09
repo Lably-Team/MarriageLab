@@ -1,6 +1,7 @@
 language:
   plugin_reloaded: "&b&lMARRIAGELAB &8» &rPlugin configuration files reloaded."
   marry:
+    married_broadcast: "&d&lMARRY &8\xbb &a%player1% &rand &a%player2% &rare now married! Congratulations!"
     main_subcommand: |-
       &d&lMARRY &8» &rHere's a list of available subcommands:
       &d&lMARRY &8» &a/marry help: &rshows this list

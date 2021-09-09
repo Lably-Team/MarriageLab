@@ -1,4 +1,7 @@
 config:
+  requests:
+    enable_expiration: true
+    expire_time: 60
   gender:
     enable_other: true
   storage:

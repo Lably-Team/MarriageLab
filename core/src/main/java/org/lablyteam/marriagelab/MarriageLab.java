@@ -3,7 +3,9 @@ package org.lablyteam.marriagelab;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.lablyteam.marriagelab.gender.Gender;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.loader.main.MainLoader;
 import org.lablyteam.marriagelab.manager.RequestManager;
@@ -16,31 +18,37 @@ import org.lablyteam.marriagelab.storage.manager.yaml.YamlDataManager;
 import org.lablyteam.marriagelab.storage.model.User;
 import org.lablyteam.marriagelab.utils.Configuration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 public class MarriageLab extends JavaPlugin {
 
     private Configuration config, language;
     private DataManager<User> dataManager;
     private RequestManager requestManager;
+    private Loader loader;
 
     @Override
     public void onEnable() {
+        this.loader = new MainLoader(this);
+
         setupConfiguration();
         setupStorage();
         setupRequestManager();
-        load();
+
+        loader.load();
 
         getLogger().info("MarriageLab version " + getDescription().getVersion() + " has been enabled!");
     }
 
     @Override
     public void onDisable() {
+        loader.unload();
+
         getLogger().info("MarriageLab version " + getDescription().getVersion() + " has been disabled!");
         getLogger().info("(see you next time...)");
-    }
-
-    private void load() {
-        Loader loader = new MainLoader(this);
-        loader.load();
     }
 
     private void setupRequestManager() {

@@ -10,6 +10,7 @@ import me.fixeddev.commandflow.bukkit.BukkitCommandManager;
 import me.fixeddev.commandflow.bukkit.factory.BukkitModule;
 import me.fixeddev.commandflow.command.Command;
 import org.lablyteam.marriagelab.MarriageLab;
+import org.lablyteam.marriagelab.commands.MarryCommand;
 import org.lablyteam.marriagelab.commands.usage.CommandUsageBuilder;
 import org.lablyteam.marriagelab.loader.Loader;
 
@@ -27,6 +28,11 @@ public class CommandLoader implements Loader {
 
     @Override
     public void load() {
+        configure();
+        registerCommand(new MarryCommand(plugin));
+    }
+
+    private void configure() {
         this.commandManager = new BukkitCommandManager("MarriageLab");
         this.commandManager.setUsageBuilder(new CommandUsageBuilder(plugin));
 
@@ -37,10 +43,14 @@ public class CommandLoader implements Loader {
         this.builder = new AnnotatedCommandTreeBuilderImpl(injector);
     }
 
-    public void registerCommand(CommandClass... commandClasses) {
+    private void registerCommand(CommandClass... commandClasses) {
         for (CommandClass commandClass : commandClasses) {
             List<Command> command = builder.fromClass(commandClass);
             commandManager.registerCommands(command);
         }
+    }
+
+    public CommandManager getCommandManager() {
+        return this.commandManager;
     }
 }

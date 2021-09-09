@@ -2,8 +2,8 @@ package org.lablyteam.marriagelab.loader.commands;
 
 import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.commands.MarryCommand;
-import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.internal.CommandClass;
+import org.lablyteam.marriagelab.loader.Loader;
 
 public class CommandLoader implements Loader {
 

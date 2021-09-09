@@ -5,7 +5,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.storage.model.User;
-import org.lablyteam.marriagelab.utils.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;

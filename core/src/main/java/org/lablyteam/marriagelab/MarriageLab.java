@@ -3,7 +3,6 @@ package org.lablyteam.marriagelab;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
-import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.loader.main.MainLoader;
@@ -21,7 +20,6 @@ public class MarriageLab extends JavaPlugin {
 
     private Configuration config, language;
     private DataManager<User> dataManager;
-    @Getter
     private RequestManager requestManager;
 
     @Override
@@ -109,5 +107,9 @@ public class MarriageLab extends JavaPlugin {
     public void reload() {
         this.config = new Configuration(this, "config");
         this.language = new Configuration(this, "language");
+    }
+
+    public RequestManager getRequestManager() {
+        return this.requestManager;
     }
 }

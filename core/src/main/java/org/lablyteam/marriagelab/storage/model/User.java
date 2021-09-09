@@ -1,15 +1,14 @@
 package org.lablyteam.marriagelab.storage.model;
 
-import com.mongodb.lang.Nullable;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.lablyteam.marriagelab.gender.Gender;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Entity("User") @SerializableAs("User")
 public class User implements ConfigurationSerializable {
@@ -18,7 +17,6 @@ public class User implements ConfigurationSerializable {
     private final UUID uuid;
     private Gender gender;
     private String partner;
-    @Getter @Setter
     private String[] blockedPlayers;
 
     public User() {
@@ -104,5 +102,13 @@ public class User implements ConfigurationSerializable {
 
     public static User valueOf(Map<String, Object> serial) {
         return new User(serial);
+    }
+
+    public String[] getBlockedPlayers() {
+        return this.blockedPlayers;
+    }
+
+    public void setBlockedPlayers(String[] blockedPlayers) {
+        this.blockedPlayers = blockedPlayers;
     }
 }

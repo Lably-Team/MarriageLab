@@ -1,6 +1,5 @@
 package org.lablyteam.marriagelab.commands;
 
-import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -16,10 +15,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@RequiredArgsConstructor
 public class MarryCommand implements CommandExecutor {
 
     private final MarriageLab plugin;
+
+    public MarryCommand(MarriageLab plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {

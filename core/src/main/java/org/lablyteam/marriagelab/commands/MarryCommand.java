@@ -78,67 +78,6 @@ public class MarryCommand implements CommandExecutor {
                     }
                 }
             }
-            case "block": {
-                if (args.length < 2) {
-                    player.sendMessage(plugin.getLanguage().getString("language.marry.block.usage"));
-                    return false;
-                }
-
-                String target = args[1];
-                User user = plugin.getDataManager().find(player.getUniqueId());
-
-                if(user.getBlockedPlayers() == null) {
-                    user.setBlockedPlayers(new String[0]);
-                }
-
-                List<String> blockedPlayers = Arrays.asList(user.getBlockedPlayers());
-
-                if (blockedPlayers.contains(target.toLowerCase())) {
-                    player.sendMessage(plugin.getLanguage().getString("language.marry.block.already_blocked")
-                            .replace("%player%", target)
-                    );
-                    return false;
-                }
-
-                blockedPlayers.add(target.toLowerCase());
-                user.setBlockedPlayers(blockedPlayers.toArray(new String[0]));
-
-                player.sendMessage(plugin.getLanguage().getString("language.marry.block.player_blocked")
-                        .replace("%player%", target)
-                );
-
-                return true;
-            }
-            case "unblock": {
-                if (args.length < 2) {
-                    player.sendMessage(plugin.getLanguage().getString("language.marry.unblock.usage"));
-                    return false;
-                }
-
-                String target = args[1];
-                User user = plugin.getDataManager().find(player.getUniqueId());
-
-                if(user.getBlockedPlayers() == null) {
-                    user.setBlockedPlayers(new String[0]);
-                }
-
-                List<String> blockedPlayers = Arrays.asList(user.getBlockedPlayers());
-
-                if (!blockedPlayers.contains(target.toLowerCase())) {
-                    player.sendMessage(plugin.getLanguage().getString("language.marry.unblock.not_blocked")
-                            .replace("%player%", target)
-                    );
-                    return false;
-                }
-
-                blockedPlayers.remove(target.toLowerCase());
-                user.setBlockedPlayers(blockedPlayers.toArray(new String[0]));
-
-                player.sendMessage(plugin.getLanguage().getString("language.marry.block.player_blocked")
-                        .replace("%player%", target)
-                );
-                return true;
-            }
             case "accept": {
                 if (args.length < 2) {
                     player.sendMessage(plugin.getLanguage().getString("language.marry.request.empty_requester"));
@@ -203,6 +142,31 @@ public class MarryCommand implements CommandExecutor {
                 plugin.getRequestManager().addRequest(player, target);
                 return true;
             }
+            case "divorce": {
+                User user = plugin.getDataManager().find(player.getUniqueId());
+                if(user.getPartner() == null || user.getPartner().isEmpty()) {
+                    player.sendMessage(plugin.getLanguage().getString("language.marry.divorce.not_married"));
+                    return false;
+                }
+
+                OfflinePlayer partner = Bukkit.getOfflinePlayer(user.getPartner());
+                User partnerUser = plugin.getDataManager().find(partner.getUniqueId());
+
+                partnerUser.setPartner("");
+                user.setPartner("");
+
+                plugin.getDataManager().save(partner.getUniqueId(), partnerUser);
+                plugin.getDataManager().save(player.getUniqueId(), user);
+
+                if(partner.isOnline()) {
+                    player.sendMessage(plugin.getLanguage().getString("language.marry.divorce.partner_divorced"));
+                    return false;
+                }
+
+                player.sendMessage(plugin.getLanguage().getString("language.marry.divorce.divorced"));
+                broadcastDivorce(Bukkit.getOfflinePlayer(player.getUniqueId()), partner);
+                return true;
+            }
             case "help":
             default: {
                 player.sendMessage(plugin.getLanguage().getString("language.marry.main_subcommand"));
@@ -223,5 +187,20 @@ public class MarryCommand implements CommandExecutor {
                         "language.marry.gender.updated_" + gender.name().toLowerCase()
                 )
         );
+    }
+
+    private void broadcastDivorce(OfflinePlayer sender, OfflinePlayer partner) {
+        Bukkit.getOnlinePlayers().forEach((Player player) -> {
+            UUID uuid = player.getUniqueId();
+
+            if(uuid.equals(sender.getUniqueId()) || uuid.equals(partner.getUniqueId())) {
+                return;
+            }
+
+            player.sendMessage(plugin.getLanguage().getString("language.marry.divorced_broadcast")
+                    .replace("%player1%", sender.getName())
+                    .replace("%player2%", partner.getName())
+            );
+        });
     }
 }

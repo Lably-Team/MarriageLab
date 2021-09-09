@@ -17,56 +17,36 @@ public class User implements ConfigurationSerializable {
     private final UUID uuid;
     private Gender gender;
     private String partner;
-    private String[] blockedPlayers;
 
     public User() {
         this.uuid = UUID.randomUUID();
         this.gender = Gender.UNSPECIFIED;
         this.partner = "";
-        this.blockedPlayers = new String[0];
     }
 
     public User(UUID uuid) {
         this.uuid = uuid;
         this.gender = Gender.UNSPECIFIED;
         this.partner = "";
-        this.blockedPlayers = new String[0];
-    }
-
-    public User(UUID uuid, Gender gender, String[] blockedPlayers) {
-        this.uuid = uuid;
-        this.gender = gender;
-        this.partner = "";
-        this.blockedPlayers = blockedPlayers;
     }
 
     public User(UUID uuid, Gender gender) {
         this.uuid = uuid;
         this.gender = gender;
         this.partner = "";
-        this.blockedPlayers = new String[0];
     }
 
     public User(UUID uuid, Gender gender, String partner) {
         this.uuid = uuid;
         this.gender = gender;
         this.partner = partner;
-        this.blockedPlayers = new String[0];
-    }
-
-    public User(UUID uuid, Gender gender, String partner, String[] blockedPlayers) {
-        this.uuid = uuid;
-        this.gender = gender;
-        this.partner = partner;
-        this.blockedPlayers = blockedPlayers;
     }
 
     public User(Map<String, Object> serial) {
         this(
                 UUID.fromString(serial.get("uuid").toString()),
                 Gender.valueOf(serial.get("gender").toString()),
-                serial.get("partner").toString(),
-                (String[]) serial.get("blockedPlayers")
+                serial.get("partner").toString()
         );
     }
 
@@ -96,7 +76,6 @@ public class User implements ConfigurationSerializable {
         serial.put("uuid", uuid.toString());
         serial.put("gender", gender.name().toUpperCase());
         serial.put("partner", partner);
-        serial.put("blockedPlayers", blockedPlayers);
         return serial;
     }
 
@@ -106,13 +85,5 @@ public class User implements ConfigurationSerializable {
 
     public static User valueOf(Map<String, Object> serial) {
         return new User(serial);
-    }
-
-    public String[] getBlockedPlayers() {
-        return this.blockedPlayers;
-    }
-
-    public void setBlockedPlayers(String[] blockedPlayers) {
-        this.blockedPlayers = blockedPlayers;
     }
 }

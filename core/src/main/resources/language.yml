@@ -2,6 +2,7 @@ language:
   plugin_reloaded: "&b&lMARRIAGELAB &8» &rPlugin configuration files reloaded. Changing the storage method requires a restart."
   marry:
     married_broadcast: "&d&lMARRY &8\xbb &a%player1% &rand &a%player2% &rare now married! Congratulations!"
+    divorced_broadcast: "&d&lMARRY &8\xbb &a%player1% &rand &a%player2% &rhave divorced."
     main_subcommand: |-
       &d&lMARRY &8» &rHere's a list of available subcommands:
       &d&lMARRY &8» &a/marry help: &rshows this list
@@ -9,12 +10,10 @@ language:
       &d&lMARRY &8» &a/marry request <player>: &rsends a marry request
       &d&lMARRY &8» &a/marry <accept/deny> <player>: &raccepts/denies a marry request
       &d&lMARRY &8» &a/marry <block/unblock> <player>: &rblocks/unblocks a player from sending requests
-    block:
-      already_blocked: "&d&lMARRY &8\xbb &a%player% &ris already blocked."
-      player_blocked: "&d&lMARRY &8\xbb &rYou have added &a%player% &rto your list of blocked players."
-    unblock:
-      not_blocked: "&d&lMARRY &8\xbb &a%player% &ris not currently in your list of blocked players."
-      unblocked: "&d&lMARRY &8\xbb &rYou have removed &a%player% &rfrom your list of blocked players."
+    divorce:
+      not_married: "&d&lMARRY &8\xbb &rYou're not married."
+      partner_divorced: "&d&lMARRY &8\xbb &rYou're no longer married becuase your partner has decided to divorce."
+      divorced: "&d&lMARRY &8\xbb &rYou're no longer married."
     request:
       request_sent: "&d&lMARRY &8\xbb &rYour proposal has been sent."
       request_accepted: "&d&lMARRY &8\xbb &rYou and &a%player% &rare now married! &rCongratulations!"

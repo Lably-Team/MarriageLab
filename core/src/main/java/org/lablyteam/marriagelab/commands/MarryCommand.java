@@ -7,6 +7,8 @@ import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.gender.Gender;
@@ -28,7 +30,7 @@ public class MarryCommand implements CommandClass {
     }
 
     @Command(names = "gender")
-    public boolean onGenderSubCommand(@Sender Player sender, @OptArg("") @Text String gender) {
+    public boolean onGenderSubCommand(@Sender Player sender, @OptArg("") String gender) {
         switch(gender.toLowerCase()) {
             case "male": {
                 updateGender(Gender.MALE, sender);
@@ -63,7 +65,7 @@ public class MarryCommand implements CommandClass {
     }
 
     @Command(names = "block")
-    public boolean onBlockSubCommand(@Sender Player sender, @OptArg("") @Text String target) {
+    public boolean onBlockSubCommand(@Sender Player sender, @OptArg("") String target) {
         User user = plugin.getDataManager().find(sender.getUniqueId());
         List<String> blockedPlayers = Arrays.asList(user.getBlockedPlayers());
 
@@ -84,7 +86,7 @@ public class MarryCommand implements CommandClass {
     }
 
     @Command(names = "unblock")
-    public boolean onUnblockSubCommand(@Sender Player sender, @OptArg("") @Text String target) {
+    public boolean onUnblockSubCommand(@Sender Player sender, @OptArg("") String target) {
         User user = plugin.getDataManager().find(sender.getUniqueId());
         List<String> blockedPlayers = Arrays.asList(user.getBlockedPlayers());
 
@@ -101,6 +103,73 @@ public class MarryCommand implements CommandClass {
         sender.sendMessage(plugin.getLanguage().getString("language.marry.block.player_blocked")
                 .replace("%player%", target)
         );
+        return true;
+    }
+
+    @Command(names = "request")
+    public boolean onRequestSubCommand(@Sender Player sender, @OptArg("") String receiver) {
+        if(receiver.isEmpty()) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.empty_receiver"));
+            return false;
+        }
+
+        Player target = Bukkit.getPlayer(receiver);
+        if(target == null) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.receiver_offline"));
+            return false;
+        }
+
+        plugin.getRequestManager().addRequest(sender, target);
+        return true;
+    }
+
+    @Command(names = "accept")
+    public boolean onAcceptSubCommand(@Sender Player sender, @OptArg("") String target) {
+        if(target.isEmpty()) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.empty_requester"));
+            return false;
+        }
+
+        OfflinePlayer requester = Bukkit.getPlayer(target);
+        UUID from = requester.getUniqueId();
+
+        if(!plugin.getRequestManager().hasPendingRequests(from)) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.invalid_request"));
+            return false;
+        }
+
+        UUID to = plugin.getRequestManager().getRequest(from);
+        if(!to.equals(sender.getUniqueId())) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.invalid_request"));
+            return false;
+        }
+
+        plugin.getRequestManager().acceptRequest(from);
+        return true;
+    }
+
+    @Command(names = "deny")
+    public boolean onDenySubCommand(@Sender Player sender, @OptArg("") String target) {
+        if(target.isEmpty()) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.empty_requester"));
+            return false;
+        }
+
+        OfflinePlayer requester = Bukkit.getPlayer(target);
+        UUID from = requester.getUniqueId();
+
+        if(!plugin.getRequestManager().hasPendingRequests(from)) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.invalid_request"));
+            return false;
+        }
+
+        UUID to = plugin.getRequestManager().getRequest(from);
+        if(!to.equals(sender.getUniqueId())) {
+            sender.sendMessage(plugin.getLanguage().getString("language.marry.request.invalid_request"));
+            return false;
+        }
+
+        plugin.getRequestManager().denyRequest(from);
         return true;
     }
 

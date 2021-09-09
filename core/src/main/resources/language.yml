@@ -13,6 +13,9 @@ language:
     unblock:
       not_blocked: "&d&lMARRY &8\xbb &a%player% &ris not currently in your list of blocked players."
       unblocked: "&d&lMARRY &8\xbb &rYou have removed &a%player% &rfrom your list of blocked players."
+    request:
+      receiver_empty: "&d&lMARRY &8\xbb &rPlease specify a player!"
+      receiver_offline: "&d&lMARRY &8\xbb &rThe player you're trying to send a request to is offline."
     gender:
       usage: "&b&lGENDER &8\xbb &rCorrect usage: &a/marry gender <male/female/other/none>"
       usage_other_disabled: "&b&lGENDER &8\xbb &rCorrect usage: &a/marry gender <male/female/none>"

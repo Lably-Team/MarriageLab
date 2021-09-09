@@ -26,6 +26,7 @@ public class MarriageLabCommand implements CommandExecutor {
         }
 
         if(args[0].equalsIgnoreCase("reload")) {
+            plugin.reload();
             sender.sendMessage(plugin.getLanguage().getString("language.plugin_reloaded"));
             return true;
         } else {

@@ -105,4 +105,9 @@ public class MarriageLab extends JavaPlugin {
     public DataManager<User> getDataManager() {
         return this.dataManager;
     }
+
+    public void reload() {
+        this.config = new Configuration(this, "config");
+        this.language = new Configuration(this, "language");
+    }
 }

@@ -1,3 +1,7 @@
 name: MarriageLab
 version: ${pom.version}
 main: org.lablyteam.marriagelab.MarriageLab
+
+commands:
+  marry:
+    description: Marry another player, change your gender, and some other things.

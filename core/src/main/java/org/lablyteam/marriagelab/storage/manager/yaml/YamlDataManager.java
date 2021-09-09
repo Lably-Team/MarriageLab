@@ -19,11 +19,7 @@ public class YamlDataManager<T extends ConfigurationSerializable> implements Dat
     @Override
     public T find(UUID uuid) {
         String path = type.getName().toLowerCase() + "." + uuid.toString();
-        if(!file.contains(path)) {
-            return null;
-        }
-
-        return type.cast(file.get(path + uuid.toString()));
+        return type.cast(file.get(path));
     }
 
     @Override

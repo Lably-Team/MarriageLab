@@ -3,7 +3,7 @@ package org.lablyteam.marriagelab.loader.listeners;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.lablyteam.marriagelab.MarriageLab;
-import org.lablyteam.marriagelab.listeners.AsyncPlayerPreLoginListener;
+import org.lablyteam.marriagelab.listeners.PlayerJoinListener;
 import org.lablyteam.marriagelab.loader.Loader;
 
 public class ListenerLoader implements Loader {
@@ -18,7 +18,7 @@ public class ListenerLoader implements Loader {
     public void load() {
         registerListener(
                 // Built-in listeners
-                new AsyncPlayerPreLoginListener(plugin)
+                new PlayerJoinListener(plugin)
         );
     }
 

@@ -1,5 +1,6 @@
 package org.lablyteam.marriagelab.loader.main;
 
+import org.bukkit.Bukkit;
 import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.loader.commands.CommandLoader;
@@ -19,6 +20,13 @@ public class MainLoader implements Loader {
                 new ListenerLoader(plugin),
                 new CommandLoader(plugin)
         );
+    }
+
+    @Override
+    public void unload() {
+        if(Bukkit.getOnlinePlayers().size() > 0) {
+            plugin.getLogger().warning("Reloading while players are connected is unsupported and will cause the plugin to not function properly. Beware.");
+        }
     }
 
     private void loadLoaders(Loader... loaders) {

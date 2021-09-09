@@ -139,6 +139,18 @@ public class MarryCommand implements CommandExecutor {
                     return false;
                 }
 
+                User user = plugin.getDataManager().find(player.getUniqueId());
+                if(user.getPartner() != null && !user.getPartner().isEmpty()) {
+                    player.sendMessage(plugin.getLanguage().getString("language.marry.request.already_married"));
+                    return false;
+                }
+
+                User targetUser = plugin.getDataManager().find(target.getUniqueId());
+                if(targetUser.getPartner() != null && !targetUser.getPartner().isEmpty()) {
+                    player.sendMessage(plugin.getLanguage().getString("language.marry.request.target_already_married"));
+                    return false;
+                }
+
                 plugin.getRequestManager().addRequest(player, target);
                 return true;
             }

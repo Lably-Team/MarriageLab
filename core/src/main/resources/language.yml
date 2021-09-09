@@ -15,6 +15,8 @@ language:
       partner_divorced: "&d&lMARRY &8\xbb &rYou're no longer married becuase your partner has decided to divorce."
       divorced: "&d&lMARRY &8\xbb &rYou're no longer married."
     request:
+      already_married: "&d&lMARRY &8\xbb &rYou're already married!"
+      target_already_married: "&d&lMARRY &8\xbb &rThat player is already married!"
       request_sent: "&d&lMARRY &8\xbb &rYour proposal has been sent."
       request_accepted: "&d&lMARRY &8\xbb &rYou and &a%player% &rare now married! &rCongratulations!"
       proposal_accepted: "&d&lMARRY &8\xbb &rYou accepted the proposal, so &a%player% &rand you are now married!"

@@ -5,3 +5,6 @@ main: org.lablyteam.marriagelab.MarriageLab
 commands:
   marry:
     description: Marry another player, change your gender, and some other things.
+  marriagelab:
+    description: The main command of MarriageLab.
+    aliases: [ml,mlab]

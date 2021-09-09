@@ -1,4 +1,5 @@
 language:
+  plugin_reloaded: "&b&lMARRIAGELAB &8» &rPlugin configuration files reloaded."
   marry:
     main_subcommand: |-
       &d&lMARRY &8» &rHere's a list of available subcommands:

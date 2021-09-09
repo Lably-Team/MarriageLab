@@ -5,6 +5,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import org.bson.UuidRepresentation;
 import org.lablyteam.marriagelab.storage.database.Database;
 
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class MongoDatabase extends Database {
             );
 
             MongoClientSettings settings = MongoClientSettings.builder()
+                    .uuidRepresentation(UuidRepresentation.STANDARD)
                     .credential(credential)
                     .applyToSslSettings(builder -> builder.enabled(ssl))
                     .applyToClusterSettings(builder ->
@@ -37,6 +39,7 @@ public class MongoDatabase extends Database {
             this.client = MongoClients.create(settings);
         } else {
             MongoClientSettings settings = MongoClientSettings.builder()
+                    .uuidRepresentation(UuidRepresentation.STANDARD)
                     .applyToSslSettings(builder -> builder.enabled(ssl))
                     .applyToClusterSettings(builder ->
                             builder.hosts(Arrays.asList(new ServerAddress(hostname, port))))

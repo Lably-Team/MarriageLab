@@ -78,7 +78,7 @@ public class RequestManagerImpl implements RequestManager {
         // Requester may have disconnected, and we would be sending a message to a non-existent player
         if(requester.isOnline()) {
             requester.getPlayer().sendMessage(
-                    plugin.getLanguage().getString("language.requests.request_accepted")
+                    plugin.getLanguage().getString("language.marry.request.request_accepted")
                             .replace("%player%", receiver.getName())
             );
         }
@@ -86,7 +86,7 @@ public class RequestManagerImpl implements RequestManager {
         // This should always be true but just in case
         if(receiver.isOnline()) {
             receiver.getPlayer().sendMessage(
-                    plugin.getLanguage().getString("language.requests.proposal_accepted")
+                    plugin.getLanguage().getString("language.marry.request.proposal_accepted")
                             .replace("%player%", requester.getName())
             );
         }
@@ -103,6 +103,30 @@ public class RequestManagerImpl implements RequestManager {
 
     @Override
     public void denyRequest(UUID from) {
+        UUID to = requests.get(from);
+        if(!hasPendingRequests(from)) {
+            throw new IllegalArgumentException("Invalid request");
+        }
 
+        OfflinePlayer requester = Bukkit.getOfflinePlayer(from);
+        OfflinePlayer receiver = Bukkit.getOfflinePlayer(to);
+
+        cancelRequest(from);
+
+        // Requester may have disconnected, and we would be sending a message to a non-existent player
+        if(requester.isOnline()) {
+            requester.getPlayer().sendMessage(
+                    plugin.getLanguage().getString("language.marry.request.request_denied")
+                            .replace("%player%", receiver.getName())
+            );
+        }
+
+        // This should always be true but just in case
+        if(receiver.isOnline()) {
+            receiver.getPlayer().sendMessage(
+                    plugin.getLanguage().getString("language.marry.request.proposal_denied")
+                            .replace("%player%", requester.getName())
+            );
+        }
     }
 }

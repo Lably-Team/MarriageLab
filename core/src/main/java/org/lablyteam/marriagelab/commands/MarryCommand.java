@@ -40,8 +40,8 @@ public class MarryCommand implements CommandExecutor {
                 if (args.length < 2) {
                     player.sendMessage(
                             plugin.getConfig().getBoolean("config.gender.enable_other")
-                                    ? plugin.getLanguage().getString("language.gender.usage_other_disabled")
-                                    : plugin.getLanguage().getString("language.gender.usage")
+                                    ? plugin.getLanguage().getString("language.marry.gender.usage")
+                                    : plugin.getLanguage().getString("language.marry.gender.usage_other_disabled")
                     );
                     return false;
                 }
@@ -57,7 +57,7 @@ public class MarryCommand implements CommandExecutor {
                     }
                     case "other": {
                         if (!plugin.getConfig().getBoolean("config.gender.enable_other")) {
-                            player.sendMessage(plugin.getLanguage().getString("language.gender.usage_other_disabled"));
+                            player.sendMessage(plugin.getLanguage().getString("language.marry.gender.usage_other_disabled"));
                             return false;
                         }
                         updateGender(Gender.OTHER, player);
@@ -71,8 +71,8 @@ public class MarryCommand implements CommandExecutor {
                     default: {
                         player.sendMessage(
                                 plugin.getConfig().getBoolean("config.gender.enable_other")
-                                        ? plugin.getLanguage().getString("language.gender.usage_other_disabled")
-                                        : plugin.getLanguage().getString("language.gender.usage")
+                                        ? plugin.getLanguage().getString("language.marry.gender.usage")
+                                        : plugin.getLanguage().getString("language.marry.gender.usage_other_disabled")
                         );
                         return false;
                     }
@@ -86,6 +86,11 @@ public class MarryCommand implements CommandExecutor {
 
                 String target = args[1];
                 User user = plugin.getDataManager().find(player.getUniqueId());
+
+                if(user.getBlockedPlayers() == null) {
+                    user.setBlockedPlayers(new String[0]);
+                }
+
                 List<String> blockedPlayers = Arrays.asList(user.getBlockedPlayers());
 
                 if (blockedPlayers.contains(target.toLowerCase())) {
@@ -112,6 +117,11 @@ public class MarryCommand implements CommandExecutor {
 
                 String target = args[1];
                 User user = plugin.getDataManager().find(player.getUniqueId());
+
+                if(user.getBlockedPlayers() == null) {
+                    user.setBlockedPlayers(new String[0]);
+                }
+
                 List<String> blockedPlayers = Arrays.asList(user.getBlockedPlayers());
 
                 if (!blockedPlayers.contains(target.toLowerCase())) {

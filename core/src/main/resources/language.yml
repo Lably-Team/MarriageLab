@@ -15,6 +15,11 @@ language:
       not_blocked: "&d&lMARRY &8\xbb &a%player% &ris not currently in your list of blocked players."
       unblocked: "&d&lMARRY &8\xbb &rYou have removed &a%player% &rfrom your list of blocked players."
     request:
+      request_accepted: "&d&lMARRY &8\xbb &rYou and &a%player% &rare now married! &rCongratulations!"
+      proposal_accepted: "&d&lMARRY &8\xbb &rYou accepted the proposal, so &a%player% &rand you are now married!"
+      request_denied: "&d&lMARRY &8\xbb &rYour proposal to &a%player% &rwas denied. That's sad."
+      proposal_denied: "&d&lMARRY &8\xbb &rYou denied the proposal of &a%player%&r."
+      request_received: "&d&lMARRY &8\xbb &rYou received a proposal from &a%player%&r. Use &a/marry accept %player% &rto accept it, or use &a/marry deny %player% &rto deny it."
       receiver_empty: "&d&lMARRY &8\xbb &rPlease specify a player!"
       receiver_offline: "&d&lMARRY &8\xbb &rThe player you're trying to send a request to is offline."
     gender:

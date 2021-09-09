@@ -23,12 +23,14 @@ public class User implements ConfigurationSerializable {
         this.uuid = UUID.randomUUID();
         this.gender = Gender.UNSPECIFIED;
         this.partner = "";
+        this.blockedPlayers = new String[0];
     }
 
     public User(UUID uuid) {
         this.uuid = uuid;
         this.gender = Gender.UNSPECIFIED;
         this.partner = "";
+        this.blockedPlayers = new String[0];
     }
 
     public User(UUID uuid, Gender gender, String[] blockedPlayers) {
@@ -42,12 +44,14 @@ public class User implements ConfigurationSerializable {
         this.uuid = uuid;
         this.gender = gender;
         this.partner = "";
+        this.blockedPlayers = new String[0];
     }
 
     public User(UUID uuid, Gender gender, String partner) {
         this.uuid = uuid;
         this.gender = gender;
         this.partner = partner;
+        this.blockedPlayers = new String[0];
     }
 
     public User(UUID uuid, Gender gender, String partner, String[] blockedPlayers) {

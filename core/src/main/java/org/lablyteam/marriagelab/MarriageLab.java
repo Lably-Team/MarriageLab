@@ -93,7 +93,7 @@ public class MarriageLab extends JavaPlugin {
                 return;
             }
             case YAML: {
-                getLogger().warning("Using YAML as the storage method. This is not recommended as it contains a lot of bugs.");
+                getLogger().info("Using YAML as the storage method.");
                 this.dataManager = new YamlDataManager<>(User.class, new Configuration(this, "data"));
                 return;
             }

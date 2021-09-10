@@ -36,6 +36,7 @@ public class Configuration extends YamlConfiguration {
         if (super.getString(path) == null) {
             return path;
         } else {
+            // TODO: add %prefix% to make the plugin easier to translate
             return ChatColor.translateAlternateColorCodes('&', super.getString(path));
         }
     }

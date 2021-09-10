@@ -4,7 +4,11 @@ import org.bukkit.Bukkit;
 import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.loader.commands.CommandLoader;
+import org.lablyteam.marriagelab.loader.file.FileLoader;
 import org.lablyteam.marriagelab.loader.listeners.ListenerLoader;
+import org.lablyteam.marriagelab.loader.manager.ManagerLoader;
+import org.lablyteam.marriagelab.loader.storage.StorageLoader;
+import org.lablyteam.marriagelab.manager.RequestManagerImpl;
 
 public class MainLoader implements Loader {
 
@@ -17,7 +21,10 @@ public class MainLoader implements Loader {
     @Override
     public void load() {
         loadLoaders(
+                new FileLoader(plugin),
+                new StorageLoader(plugin),
                 new ListenerLoader(plugin),
+                new ManagerLoader(plugin),
                 new CommandLoader(plugin)
         );
     }
@@ -25,7 +32,8 @@ public class MainLoader implements Loader {
     @Override
     public void unload() {
         if(Bukkit.getOnlinePlayers().size() > 0) {
-            plugin.getLogger().warning("Reloading while players are connected is unsupported and will cause the plugin to not function properly. Beware.");
+            plugin.getLogger().warning("Reloading while players are connected is unsupported and will cause the " +
+                    "plugin to not function properly. Beware.");
         }
     }
 

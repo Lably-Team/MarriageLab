@@ -11,8 +11,6 @@ import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.gender.Gender;
 import org.lablyteam.marriagelab.storage.model.User;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class MarryCommand implements CommandExecutor {

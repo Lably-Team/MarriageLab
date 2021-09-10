@@ -1,40 +1,19 @@
 package org.lablyteam.marriagelab;
 
-import dev.morphia.Datastore;
-import dev.morphia.Morphia;
-import dev.morphia.mapping.MapperOptions;
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.lablyteam.marriagelab.gender.Gender;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.loader.main.MainLoader;
 import org.lablyteam.marriagelab.manager.RequestManager;
-import org.lablyteam.marriagelab.manager.RequestManagerImpl;
-import org.lablyteam.marriagelab.storage.StorageMethod;
 import org.lablyteam.marriagelab.storage.database.Database;
-import org.lablyteam.marriagelab.storage.database.mongo.MongoDatabase;
 import org.lablyteam.marriagelab.storage.manager.DataManager;
-import org.lablyteam.marriagelab.storage.manager.mongo.MongoDataManager;
-import org.lablyteam.marriagelab.storage.manager.yaml.YamlDataManager;
 import org.lablyteam.marriagelab.storage.model.User;
 import org.lablyteam.marriagelab.utils.Configuration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
 public class MarriageLab extends JavaPlugin {
 
-    @Setter @Getter
     private Database database;
-    @Setter
     private Configuration config, language;
-    @Setter
     private DataManager<User> dataManager;
-    @Setter
     private RequestManager requestManager;
     private Loader loader;
 
@@ -74,5 +53,29 @@ public class MarriageLab extends JavaPlugin {
 
     public RequestManager getRequestManager() {
         return this.requestManager;
+    }
+
+    public Database getPluginDatabase() {
+        return this.database;
+    }
+
+    public void setPluginDatabase(Database database) {
+        this.database = database;
+    }
+
+    public void setConfig(Configuration config) {
+        this.config = config;
+    }
+
+    public void setLanguage(Configuration language) {
+        this.language = language;
+    }
+
+    public void setDataManager(DataManager<User> dataManager) {
+        this.dataManager = dataManager;
+    }
+
+    public void setRequestManager(RequestManager requestManager) {
+        this.requestManager = requestManager;
     }
 }

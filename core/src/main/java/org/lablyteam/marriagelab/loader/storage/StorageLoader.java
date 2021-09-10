@@ -3,7 +3,6 @@ package org.lablyteam.marriagelab.loader.storage;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.mapping.MapperOptions;
-import lombok.RequiredArgsConstructor;
 import org.lablyteam.marriagelab.MarriageLab;
 import org.lablyteam.marriagelab.loader.Loader;
 import org.lablyteam.marriagelab.storage.StorageMethod;
@@ -15,10 +14,13 @@ import org.lablyteam.marriagelab.storage.manager.yaml.YamlDataManager;
 import org.lablyteam.marriagelab.storage.model.User;
 import org.lablyteam.marriagelab.utils.Configuration;
 
-@RequiredArgsConstructor
 public class StorageLoader implements Loader {
 
     private final MarriageLab plugin;
+
+    public StorageLoader(MarriageLab plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public void load() {
@@ -51,7 +53,7 @@ public class StorageLoader implements Loader {
                 datastore.ensureIndexes();
 
                 DataManager<User> dataManager = new MongoDataManager<>(User.class, datastore);
-                plugin.setDatabase(database);
+                plugin.setPluginDatabase(database);
                 plugin.setDataManager(dataManager);
                 return;
             }
@@ -70,7 +72,7 @@ public class StorageLoader implements Loader {
 
     @Override
     public void unload() {
-        Database database = plugin.getDatabase();
+        Database database = plugin.getPluginDatabase();
         if(database != null) {
             database.disconnect();
         }

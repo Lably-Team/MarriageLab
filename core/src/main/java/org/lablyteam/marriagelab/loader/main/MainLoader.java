@@ -8,7 +8,6 @@ import org.lablyteam.marriagelab.loader.file.FileLoader;
 import org.lablyteam.marriagelab.loader.listeners.ListenerLoader;
 import org.lablyteam.marriagelab.loader.manager.ManagerLoader;
 import org.lablyteam.marriagelab.loader.storage.StorageLoader;
-import org.lablyteam.marriagelab.manager.RequestManagerImpl;
 
 public class MainLoader implements Loader {
 
